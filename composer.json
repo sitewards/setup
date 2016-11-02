@@ -1,0 +1,24 @@
+{
+    "name": "sitewards/setup",
+    "require": {
+        "jms/serializer": "^1.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sitewards\\Setup\\": "src/Sitewards/Setup"
+        }
+    },
+    "authors": [
+        {
+            "name": "David Manners",
+            "email": "david.manners@sitewards.com"
+        },
+        {
+            "name": "Darko Poposki",
+            "email": "darko.poposki@sitewards.com"
+        }
+    ]
+}
