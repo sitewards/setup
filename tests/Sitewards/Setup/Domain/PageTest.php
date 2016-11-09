@@ -38,10 +38,10 @@ class PageTest extends \PHPUnit_Framework_TestCase
         /** @var Page $page */
         $page = $this->serializer->deserialize(
             '{
-	"title": "test",
-	"active": true,
-	"content": "Test Page Content"
-}',
+                "title": "test",
+                "active": true,
+                "content": "Test Page Content"
+            }',
             Page::class,
             'json'
         );
