@@ -33,7 +33,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test to make sure that strings work
      */
-    public function testSuccessfulSerilization()
+    public function testSuccessfulDeserilization()
     {
         /** @var Page $page */
         $page = $this->serializer->deserialize(
@@ -48,5 +48,23 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('test', $page->getTitle());
         $this->assertTrue($page->getActive());
         $this->assertEquals('Test Page Content', $page->getContent());
+    }
+
+    /**
+     * Test to make sure that strings work
+     */
+    public function testSuccessfulSerilization()
+    {
+        /** @var Page $page */
+        $page = new Page(
+            'test',
+            'Test Page Content',
+            true
+        );
+        $pageJson = $this->serializer->serialize($page, 'json');
+        $this->assertEquals(
+            '{"title":"test","content":"Test Page Content","active":true}',
+            $pageJson
+        );
     }
 }

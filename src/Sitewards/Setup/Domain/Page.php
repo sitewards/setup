@@ -22,6 +22,22 @@ class Page
     private $active;
 
     /**
+     * @param string $title
+     * @param string $content
+     * @param boolean $active
+     */
+    public function __construct(
+        $title,
+        $content,
+        $active
+    )
+    {
+        $this->title = $title;
+        $this->content = $content;
+        $this->active = $active;
+    }
+
+    /**
      * @return string
      */
     public function getTitle()
