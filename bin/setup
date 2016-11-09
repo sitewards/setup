@@ -1,0 +1,11 @@
+#!/usr/bin/env php
+<?php
+
+require_once 'vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Sitewards\Setup\Command\Page\Dump;
+
+$application = new Application();
+$application->add(new Dump());
+$application->run();

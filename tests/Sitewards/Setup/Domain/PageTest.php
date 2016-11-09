@@ -33,7 +33,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test to make sure that strings work
      */
-    public function testSuccessfulDeserilization()
+    public function testSuccessfulDeserialization()
     {
         /** @var Page $page */
         $page = $this->serializer->deserialize(
@@ -53,7 +53,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test to make sure that strings work
      */
-    public function testSuccessfulSerilization()
+    public function testSuccessfulSerialization()
     {
         /** @var Page $page */
         $page = new Page(
