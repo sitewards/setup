@@ -13,9 +13,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Dump extends Command
 {
-    /**
-     * @var PageRepositoryInterface
-     */
     private $pageRepository;
 
     public function __construct(
@@ -36,8 +33,9 @@ class Dump extends Command
             ->setDescription('Dump page(s) to JSON format')
             ->addArgument(
                 'identifier',
-                InputArgument::OPTIONAL,
-                'Which page identifier would you like to dump?'
+                InputArgument::IS_ARRAY,
+                'Which page identifier would you like to dump?',
+                null
             );
     }
 
@@ -55,21 +53,7 @@ class Dump extends Command
 
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
 
-        if ($identifier) {
-            $dumper = new SingleDumper($this->pageRepository, $serializer, $identifier);
-            $dumper->execute();
-
-            $output->writeln('One');
-        } else {
-            $pages = [
-                new Page('Title 1', 'Content 1', true),
-                new Page('Title 2', 'Content 2', true),
-                new Page('Title 3', 'Content 3', false)
-            ];
-
-            $jsonContent = $serializer->serialize($pages, 'json');
-            file_put_contents('dump_all.json', $jsonContent);
-            $output->writeln('All');
-        }
+        $dumper = new SingleDumper($this->pageRepository, $serializer, $identifier);
+        $dumper->execute();
     }
 }

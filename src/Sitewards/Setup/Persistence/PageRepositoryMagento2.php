@@ -11,27 +11,46 @@ class PageRepositoryMagento2 implements PageRepositoryInterface
      */
     private $pageRepository;
 
+    /**
+     * @var \Magento\Framework\Api\SearchCriteriaBuilder
+     */
+    private $searchCriteria;
+
     public function __construct(
-        \Magento\Cms\Api\PageRepositoryInterface $pageRepository
+        \Magento\Cms\Api\PageRepositoryInterface $pageRepositoryInterface,
+        \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteria
     ) {
-        $this->pageRepository = $pageRepository;
+        $this->pageRepository = $pageRepositoryInterface;
+        $this->searchCriteria = $searchCriteria;
     }
 
     /**
-     * Find a page in the Magento Cms
-     *
      * @param $id
-     * @return Page
+     * @return Page[]
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function findById($id)
     {
-        /** @var \Magento\Cms\Api\Data\PageInterface $page */
-        $page = $this->pageRepository->getById($id);
+        if (!empty($id)) {
+            $this->searchCriteria->addFilter(
+                'identifier',
+                implode(',', $id),
+                'in'
+            );
+        }
 
-        return new Page(
-            $page->getTitle(),
-            $page->getContent(),
-            $page->isActive()
-        );
+        /** @var \Magento\Framework\Api\SearchResults $results */
+        $results = $this->pageRepository->getList($this->searchCriteria->create());
+
+        $pages = [];
+        foreach ($results->getItems() as $page) {
+            $pages[] = new Page(
+                $page['identifier'],
+                $page['content'],
+                $page['active']
+            );
+        }
+
+        return $pages;
     }
 }
