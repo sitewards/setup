@@ -17,6 +17,12 @@ class PageRepositoryMagento2 implements PageRepositoryInterface
         $this->pageRepository = $pageRepository;
     }
 
+    /**
+     * Find a page in the Magento Cms
+     *
+     * @param $id
+     * @return Page
+     */
     public function findById($id)
     {
         /** @var \Magento\Cms\Api\Data\PageInterface $page */
