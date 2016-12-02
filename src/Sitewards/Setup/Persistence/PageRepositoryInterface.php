@@ -4,5 +4,6 @@ namespace Sitewards\Setup\Persistence;
 
 interface PageRepositoryInterface
 {
-    public function findById($id);
+    public function findByIds(array $ids);
+    public function findAll();
 }

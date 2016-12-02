@@ -25,20 +25,27 @@ class PageRepositoryMagento2 implements PageRepositoryInterface
     }
 
     /**
-     * @param $id
+     * @param array $ids
      * @return Page[]
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function findById($id)
+    public function findByIds(array $ids)
     {
-        if (!empty($id)) {
-            $this->searchCriteria->addFilter(
-                'identifier',
-                implode(',', $id),
-                'in'
-            );
-        }
+        $this->setIdFilter($ids);
+        return $this->findItems();
+    }
 
+    public function findAll()
+    {
+        return $this->findItems();
+    }
+
+    /**
+     * @return Page[]
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    private function findItems()
+    {
         /** @var \Magento\Framework\Api\SearchResults $results */
         $results = $this->pageRepository->getList($this->searchCriteria->create());
 
@@ -52,5 +59,21 @@ class PageRepositoryMagento2 implements PageRepositoryInterface
         }
 
         return $pages;
+    }
+
+    /**
+     * Set the filter ids
+     *
+     * @param array $ids
+     */
+    private function setIdFilter(array $ids)
+    {
+        if (!empty($ids)) {
+            $this->searchCriteria->addFilter(
+                'identifier',
+                implode(',', $ids),
+                'in'
+            );
+        }
     }
 }

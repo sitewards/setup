@@ -5,6 +5,7 @@ namespace Sitewards\Setup\Command\Page;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Sitewards\Setup\Domain\Page;
 use Sitewards\Setup\Persistence\PageRepositoryInterface;
+use Sitewards\Setup\Service\Page\Dumper\MultipleDumper;
 use Sitewards\Setup\Service\Page\Dumper\SingleDumper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -53,7 +54,11 @@ class Dump extends Command
 
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
 
-        $dumper = new SingleDumper($this->pageRepository, $serializer, $identifier);
+        if (empty($identifier)) {
+            $dumper = new MultipleDumper($this->pageRepository, $serializer);
+        } else {
+            $dumper = new SingleDumper($this->pageRepository, $serializer, $identifier);
+        }
         $dumper->execute();
     }
 }
