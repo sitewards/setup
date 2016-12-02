@@ -4,7 +4,7 @@ namespace Sitewards\Setup\Command\Page;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Sitewards\Setup\Domain\Page;
-use Sitewards\Setup\Persistence\PageRepositoryMagento2Dummy;
+use Sitewards\Setup\Persistence\PageRepositoryInterface;
 use Sitewards\Setup\Service\Page\Dumper\SingleDumper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -13,6 +13,19 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Dump extends Command
 {
+    /**
+     * @var PageRepositoryInterface
+     */
+    private $pageRepository;
+
+    public function __construct(
+        PageRepositoryInterface $pageRepository
+    )
+    {
+        parent::__construct();
+        $this->pageRepository = $pageRepository;
+    }
+
     /*
      * {@inheritdoc}
      */
@@ -43,8 +56,7 @@ class Dump extends Command
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
 
         if ($identifier) {
-            $pageRepository = new PageRepositoryMagento2Dummy();
-            $dumper = new SingleDumper($pageRepository, $serializer, $identifier);
+            $dumper = new SingleDumper($this->pageRepository, $serializer, $identifier);
             $dumper->execute();
 
             $output->writeln('One');

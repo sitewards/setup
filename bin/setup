@@ -5,7 +5,20 @@ require_once 'vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
 use Sitewards\Setup\Command\Page\Dump;
+use Sitewards\Setup\Persistence\PageRepositoryMagento2Dummy;
+
+require __DIR__ . '/../app/bootstrap.php';
+
+$coreCliApplication = new \Magento\Framework\Console\Cli();
+$objectManager      = \Magento\Framework\App\ObjectManager::getInstance();
+$mage2Bridge        = new PageRepositoryMagento2(
+    $objectManager->get('\Magento\Cms\Api\PageRepositoryInterface')
+);
 
 $application = new Application();
-$application->add(new Dump());
+$application->add(
+    new Dump(
+        $mage2Bridge
+    )
+);
 $application->run();
