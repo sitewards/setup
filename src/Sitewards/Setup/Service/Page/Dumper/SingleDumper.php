@@ -7,17 +7,23 @@ use Sitewards\Setup\Persistence\PageRepositoryInterface;
 
 class SingleDumper extends AbstractDumper
 {
-    private $id;
+    /**
+     * @var string[]
+     */
+    private $ids;
 
-    public function __construct(PageRepositoryInterface $pageRepository, Serializer $serializer, $id)
-    {
-        $this->id = $id;
+    public function __construct(
+        PageRepositoryInterface $pageRepository,
+        Serializer $serializer,
+        array $ids
+    ) {
+        $this->ids = $ids;
 
         parent::__construct($pageRepository, $serializer);
     }
 
     public function prepareData()
     {
-        $this->data = $this->pageRepository->findById($this->id);
+        $this->data = $this->pageRepository->findByIds($this->ids);
     }
 }

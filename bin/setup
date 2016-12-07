@@ -5,14 +5,16 @@ require_once 'vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
 use Sitewards\Setup\Command\Page\Dump;
-use Sitewards\Setup\Persistence\PageRepositoryMagento2Dummy;
+use Sitewards\Setup\Persistence\PageRepositoryMagento2;
 
 require __DIR__ . '/../app/bootstrap.php';
 
 $coreCliApplication = new \Magento\Framework\Console\Cli();
 $objectManager      = \Magento\Framework\App\ObjectManager::getInstance();
-$mage2Bridge        = new PageRepositoryMagento2(
-    $objectManager->get('\Magento\Cms\Api\PageRepositoryInterface')
+
+$mage2Bridge = new PageRepositoryMagento2(
+    $objectManager->get('\Magento\Cms\Api\PageRepositoryInterface'),
+    $objectManager->get('\Magento\Framework\Api\SearchCriteriaBuilder')
 );
 
 $application = new Application();
