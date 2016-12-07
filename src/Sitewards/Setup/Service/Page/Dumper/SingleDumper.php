@@ -4,6 +4,7 @@ namespace Sitewards\Setup\Service\Page\Dumper;
 
 use JMS\Serializer\Serializer;
 use Sitewards\Setup\Persistence\PageRepositoryInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 class SingleDumper extends AbstractDumper
 {
@@ -15,11 +16,12 @@ class SingleDumper extends AbstractDumper
     public function __construct(
         PageRepositoryInterface $pageRepository,
         Serializer $serializer,
+        Filesystem $filesystem,
         array $ids
     ) {
         $this->ids = $ids;
 
-        parent::__construct($pageRepository, $serializer);
+        parent::__construct($pageRepository, $serializer, $filesystem);
     }
 
     public function prepareData()
