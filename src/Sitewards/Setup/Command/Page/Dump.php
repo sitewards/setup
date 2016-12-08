@@ -3,7 +3,6 @@
 namespace Sitewards\Setup\Command\Page;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Sitewards\Setup\Domain\Page;
 use Sitewards\Setup\Persistence\PageRepositoryInterface;
 use Sitewards\Setup\Service\Page\Dumper\MultipleDumper;
 use Sitewards\Setup\Service\Page\Dumper\SingleDumper;
@@ -11,6 +10,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 class Dump extends Command
 {
@@ -55,9 +55,9 @@ class Dump extends Command
         $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
 
         if (empty($identifier)) {
-            $dumper = new MultipleDumper($this->pageRepository, $serializer);
+            $dumper = new MultipleDumper($this->pageRepository, $serializer, new Filesystem());
         } else {
-            $dumper = new SingleDumper($this->pageRepository, $serializer, $identifier);
+            $dumper = new SingleDumper($this->pageRepository, $serializer, new Filesystem(), $identifier);
         }
         $dumper->execute();
     }
