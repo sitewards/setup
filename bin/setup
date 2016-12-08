@@ -2,12 +2,21 @@
 <?php
 
 require_once 'vendor/autoload.php';
+require __DIR__ . '/../app/bootstrap.php';
 
-use Symfony\Component\Console\Application;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Sitewards\Setup\Command\Page\Dump;
 use Sitewards\Setup\Persistence\PageRepositoryMagento2;
+use Sitewards\Setup\Service\Page\Dumper\Dumper;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Filesystem\Filesystem;
 
-require __DIR__ . '/../app/bootstrap.php';
+AnnotationRegistry::registerAutoloadNamespace(
+    'JMS\Serializer\Annotation',
+    'vendor/jms/serializer/src'
+);
+
+$serializer = \JMS\Serializer\SerializerBuilder::create()->build();
 
 $coreCliApplication = new \Magento\Framework\Console\Cli();
 $objectManager      = \Magento\Framework\App\ObjectManager::getInstance();
@@ -17,10 +26,14 @@ $mage2Bridge = new PageRepositoryMagento2(
     $objectManager->get('\Magento\Framework\Api\SearchCriteriaBuilder')
 );
 
+$dumper = new Dumper(
+    $mage2Bridge,
+    $serializer,
+    new Filesystem()
+);
+
 $application = new Application();
 $application->add(
-    new Dump(
-        $mage2Bridge
-    )
+    new Dump($dumper)
 );
 $application->run();
