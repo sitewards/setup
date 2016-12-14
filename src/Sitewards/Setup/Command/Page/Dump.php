@@ -2,29 +2,28 @@
 
 namespace Sitewards\Setup\Command\Page;
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
-use Sitewards\Setup\Persistence\PageRepositoryInterface;
-use Sitewards\Setup\Service\Page\Dumper\MultipleDumper;
-use Sitewards\Setup\Service\Page\Dumper\SingleDumper;
+use Sitewards\Setup\Service\Page\Dumper\DumperInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
 
 class Dump extends Command
 {
-    private $pageRepository;
+    /** @var DumperInterface */
+    private $dumper;
 
-    public function __construct(
-        PageRepositoryInterface $pageRepository
-    )
+    /**
+     * @param DumperInterface $dumper
+     */
+    public function __construct(DumperInterface $dumper)
     {
         parent::__construct();
-        $this->pageRepository = $pageRepository;
+
+        $this->dumper = $dumper;
     }
 
-    /*
+    /**
      * {@inheritdoc}
      */
     protected function configure()
@@ -40,25 +39,14 @@ class Dump extends Command
             );
     }
 
-    /*
+    /**
      * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $identifier = $input->getArgument('identifier');
 
-        AnnotationRegistry::registerAutoloadNamespace(
-            'JMS\Serializer\Annotation',
-            'vendor/jms/serializer/src'
-        );
-
-        $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
-
-        if (empty($identifier)) {
-            $dumper = new MultipleDumper($this->pageRepository, $serializer, new Filesystem());
-        } else {
-            $dumper = new SingleDumper($this->pageRepository, $serializer, new Filesystem(), $identifier);
-        }
-        $dumper->execute();
+        $this->dumper->setIdentifier($identifier);
+        $this->dumper->execute();
     }
 }

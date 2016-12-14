@@ -7,16 +7,22 @@ use JMS\Serializer\Annotation\Type;
 class Page
 {
     /**
+     * @var string
+     *
      * @Type("string")
      */
     private $title;
 
     /**
+     * @var string
+     *
      * @Type("string")
      */
     private $content;
 
     /**
+     * @var bool
+     *
      * @Type("boolean")
      */
     private $active;
