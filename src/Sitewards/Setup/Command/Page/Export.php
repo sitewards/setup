@@ -1,26 +1,32 @@
 <?php
 
+/**
+ * This file is part of the Setup package.
+ *
+ * (c) Sitewards GmbH
+ */
+
 namespace Sitewards\Setup\Command\Page;
 
-use Sitewards\Setup\Service\Page\Dumper\DumperInterface;
+use Sitewards\Setup\Service\Page\ExporterInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Dump extends Command
+class Export extends Command
 {
-    /** @var DumperInterface */
-    private $dumper;
+    /** @var ExporterInterface */
+    private $exporter;
 
     /**
-     * @param DumperInterface $dumper
+     * @param ExporterInterface $exporter
      */
-    public function __construct(DumperInterface $dumper)
+    public function __construct(ExporterInterface $exporter)
     {
         parent::__construct();
 
-        $this->dumper = $dumper;
+        $this->exporter = $exporter;
     }
 
     /**
@@ -29,12 +35,12 @@ class Dump extends Command
     protected function configure()
     {
         $this
-            ->setName('page:dump')
-            ->setDescription('Dump page(s) to JSON format')
+            ->setName('page:export')
+            ->setDescription('Export page(s) to JSON format')
             ->addArgument(
                 'identifier',
                 InputArgument::IS_ARRAY,
-                'Which page identifier would you like to dump?',
+                'Which page identifier would you like to export?',
                 null
             );
     }
@@ -46,7 +52,7 @@ class Dump extends Command
     {
         $identifier = $input->getArgument('identifier');
 
-        $this->dumper->setIdentifier($identifier);
-        $this->dumper->execute();
+        $this->exporter->setIdentifier($identifier);
+        $this->exporter->execute();
     }
 }

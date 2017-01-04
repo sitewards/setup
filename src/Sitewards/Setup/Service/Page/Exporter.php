@@ -1,25 +1,42 @@
 <?php
 
-namespace Sitewards\Setup\Service\Page\Dumper;
+/**
+ * This file is part of the Setup package.
+ *
+ * (c) Sitewards GmbH
+ */
+
+namespace Sitewards\Setup\Service\Page;
 
 use JMS\Serializer\Serializer;
-use Sitewards\Setup\Persistence\PageRepositoryInterface;
+use Sitewards\Setup\Domain\Page\PageRepositoryInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-class Dumper implements DumperInterface
+class Exporter implements ExporterInterface
 {
+    /**
+     * @var string
+     */
     private $filename = 'pages.json';
 
-    /** @var PageRepositoryInterface */
+    /**
+     * @var PageRepositoryInterface
+     */
     private $pageRepository;
 
-    /** @var Serializer */
+    /**
+     * @var Serializer
+     */
     private $serializer;
 
-    /** @var Filesystem */
+    /**
+     * @var Filesystem
+     */
     private $filesystem;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     private $identifier;
 
     /**

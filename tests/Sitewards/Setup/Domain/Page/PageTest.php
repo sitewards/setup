@@ -1,6 +1,12 @@
 <?php
 
-namespace Sitewards\Setup\Domain;
+/**
+ * This file is part of the Setup package.
+ *
+ * (c) Sitewards GmbH
+ */
+
+namespace Sitewards\Setup\Domain\Page;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 

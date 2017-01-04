@@ -1,6 +1,12 @@
 <?php
 
-namespace Sitewards\Setup\Domain;
+/**
+ * This file is part of the Setup package.
+ *
+ * (c) Sitewards GmbH
+ */
+
+namespace Sitewards\Setup\Domain\Page;
 
 use JMS\Serializer\Annotation\Type;
 
@@ -38,9 +44,9 @@ class Page
         $active
     )
     {
-        $this->title = $title;
+        $this->title   = $title;
         $this->content = $content;
-        $this->active = $active;
+        $this->active  = $active;
     }
 
     /**
@@ -66,5 +72,4 @@ class Page
     {
         return $this->active;
     }
-
 }

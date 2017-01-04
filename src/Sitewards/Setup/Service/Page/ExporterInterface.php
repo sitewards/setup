@@ -1,8 +1,14 @@
 <?php
 
-namespace Sitewards\Setup\Service\Page\Dumper;
+/**
+ * This file is part of the Setup package.
+ *
+ * (c) Sitewards GmbH
+ */
 
-interface DumperInterface
+namespace Sitewards\Setup\Service\Page;
+
+interface ExporterInterface
 {
     /**
      * @param array $identifier

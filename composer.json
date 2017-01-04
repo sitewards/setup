@@ -1,9 +1,12 @@
 {
     "name": "sitewards/setup",
+    "description": "Sitewards Setup",
+    "type": "library",
+    "license": "MIT",
     "require": {
-        "jms/serializer": "^1.3",
-        "symfony/console": "^3.1",
-        "symfony/filesystem": "^3.1"
+        "jms/serializer": "~1.3",
+        "symfony/console": "~3.1",
+        "symfony/filesystem": "~3.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.6"
