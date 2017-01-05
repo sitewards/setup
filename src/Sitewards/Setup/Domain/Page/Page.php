@@ -17,6 +17,13 @@ class Page
      *
      * @Type("string")
      */
+    private $identifier;
+
+    /**
+     * @var string
+     *
+     * @Type("string")
+     */
     private $title;
 
     /**
@@ -34,19 +41,30 @@ class Page
     private $active;
 
     /**
+     * @param string $identifier
      * @param string $title
      * @param string $content
      * @param boolean $active
      */
     public function __construct(
+        $identifier,
         $title,
         $content,
         $active
     )
     {
-        $this->title   = $title;
-        $this->content = $content;
-        $this->active  = $active;
+        $this->identifier = $identifier;
+        $this->title      = $title;
+        $this->content    = $content;
+        $this->active     = $active;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
     }
 
     /**

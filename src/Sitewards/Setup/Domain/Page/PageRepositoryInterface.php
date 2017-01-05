@@ -21,4 +21,11 @@ interface PageRepositoryInterface
      * @return Page[]
      */
     public function findAll();
+
+    /**
+     * @param Page $page
+     *
+     * @return void
+     */
+    public function import(Page $page);
 }
