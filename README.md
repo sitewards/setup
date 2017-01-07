@@ -10,8 +10,7 @@ To build a bridge you need to use the interface `src/Sitewards/Setup/Domain/Page
 
 1. Magento 2 (https://bitbucket.org/dmanners/setup-mage2)
 
-Authors
--------
+### Authors ###
 
 * David Manners <david.manners@sitewards.com>
 * Darko Poposki <darko.poposki@sitewards.com>
