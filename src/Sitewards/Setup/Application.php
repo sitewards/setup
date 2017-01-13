@@ -16,7 +16,6 @@ use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\Serializer;
 
 use Sitewards\Setup\Application\BridgeInterface;
-use Sitewards\Setup\Domain\Page\PageRepositoryInterface;
 use Sitewards\Setup\Command\Page\Export;
 use Sitewards\Setup\Service\Page\Exporter;
 use Sitewards\Setup\Service\Page\Importer;
