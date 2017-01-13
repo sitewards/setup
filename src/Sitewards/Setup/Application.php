@@ -23,18 +23,18 @@ use Sitewards\Setup\Command\Page\Import;
 
 class Application extends SymfonyApplication
 {
+    const APPLICATION_NAME    = 'Sitewards Setup';
+    const APPLICATION_VERSION = '1.0.0';
+
     /** @var BridgeInterface */
     private $applicationBridge;
 
     /** @var Serializer */
     private $serializer;
 
-    public function __construct(
-        $defaultName = 'Sitewards Setup',
-        $version = '1.0.0',
-        BridgeInterface $applicationBridge
-    ) {
-        parent::__construct($defaultName, $version);
+    public function __construct(BridgeInterface $applicationBridge)
+    {
+        parent::__construct(self::APPLICATION_NAME, self::APPLICATION_VERSION);
         $this->applicationBridge = $applicationBridge;
         $this->initSerializer();
         $this->initCommands();
