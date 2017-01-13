@@ -15,6 +15,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\Serializer;
 
+use Sitewards\Setup\Application\BridgeInterface;
 use Sitewards\Setup\Domain\Page\PageRepositoryInterface;
 use Sitewards\Setup\Command\Page\Export;
 use Sitewards\Setup\Service\Page\Exporter;
@@ -23,7 +24,7 @@ use Sitewards\Setup\Command\Page\Import;
 
 class Application extends SymfonyApplication
 {
-    /** @var PageRepositoryInterface */
+    /** @var BridgeInterface */
     private $applicationBridge;
 
     /** @var Serializer */
@@ -32,7 +33,7 @@ class Application extends SymfonyApplication
     public function __construct(
         $defaultName = 'Sitewards Setup',
         $version = '1.0.0',
-        PageRepositoryInterface $applicationBridge
+        BridgeInterface $applicationBridge
     ) {
         parent::__construct($defaultName, $version);
         $this->applicationBridge = $applicationBridge;
@@ -56,7 +57,7 @@ class Application extends SymfonyApplication
     private function initCommands()
     {
         $exporter = new Exporter(
-            $this->applicationBridge,
+            $this->applicationBridge->getPageRepository(),
             $this->serializer,
             new Filesystem()
         );
@@ -66,7 +67,7 @@ class Application extends SymfonyApplication
         );
 
         $importer = new Importer(
-            $this->applicationBridge,
+            $this->applicationBridge->getPageRepository(),
             $this->serializer
         );
 
