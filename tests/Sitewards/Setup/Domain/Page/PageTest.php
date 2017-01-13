@@ -44,14 +44,16 @@ class PageTest extends \PHPUnit_Framework_TestCase
         /** @var Page $page */
         $page = $this->serializer->deserialize(
             '{
-                "title": "test",
+                "identifier": "test-id",
+                "title": "Test Title",
                 "active": true,
                 "content": "Test Page Content"
             }',
             Page::class,
             'json'
         );
-        $this->assertEquals('test', $page->getTitle());
+        $this->assertEquals('test-id', $page->getIdentifier());
+        $this->assertEquals('Test Title', $page->getTitle());
         $this->assertTrue($page->getActive());
         $this->assertEquals('Test Page Content', $page->getContent());
     }
@@ -63,13 +65,14 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         /** @var Page $page */
         $page = new Page(
-            'test',
+            'test-id',
+            'Test Title',
             'Test Page Content',
             true
         );
         $pageJson = $this->serializer->serialize($page, 'json');
         $this->assertEquals(
-            '{"title":"test","content":"Test Page Content","active":true}',
+            '{"identifier":"test-id","title":"Test Title","content":"Test Page Content","active":true}',
             $pageJson
         );
     }
