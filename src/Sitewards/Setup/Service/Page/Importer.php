@@ -40,7 +40,7 @@ class Importer implements ImporterInterface
      */
     public function execute()
     {
-        $pages = $this->serializer->deserialize(file_get_contents($this->filename), 'array<Sitewards\Setup\Domain\Page>', 'json');
+        $pages = $this->serializer->deserialize(file_get_contents($this->filename), 'array<Sitewards\Setup\Domain\Page\Page>', 'json');
 
         foreach ($pages as $page) {
             $this->pageRepository->import($page);
