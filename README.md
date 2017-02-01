@@ -29,7 +29,11 @@ To build a bridge you need to use the interface `src/Sitewards/Setup/Domain/Page
 1. Magento 1 (https://github.com/sitewards/setup-mage1)
 2. Magento 2 (https://github.com/sitewards/setup-mage2)
 
-### Authors ###
+## Issues ##
+
+To learn about issues, click [here](https://github.com/sitewards/setup/issues). To open an issue, click [here](https://github.com/sitewards/setup/issues/new).
+
+## Authors ##
 
 * David Manners <david.manners@sitewards.com>
 * Darko Poposki <darko.poposki@sitewards.com>
