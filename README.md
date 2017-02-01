@@ -9,7 +9,7 @@ The service layer in our generic Setup module implements the following:
 1. An implementation of `src/Sitewards/Setup/Service/Page/ExporterInterface.php`,
  - Which is making a use of the PageRepository where we retrieve the requested page(s). We then serialize and dump this content to a file.
 2. An implementation of `src/Sitewards/Setup/Service/Page/ImporterInterface.php`,
-- Which is making a use of the PageRepository where we try to store the given page(s), after deserializing the content we found inside the `pages.json` file.
+ - Which is making a use of the PageRepository where we try to store the given page(s), after deserializing the content we found inside the `pages.json` file.
 
 Each bridge requires the following:
 
