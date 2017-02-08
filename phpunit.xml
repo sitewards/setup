@@ -14,7 +14,7 @@
     </logging>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src/Sitewards/Setup/</directory>
+            <directory suffix=".php">./src/</directory>
         </whitelist>
     </filter>
     <testsuites>
