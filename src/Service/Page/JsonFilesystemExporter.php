@@ -12,7 +12,7 @@ use JMS\Serializer\Serializer;
 use Sitewards\Setup\Domain\Page\PageRepositoryInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-final class Exporter implements ExporterInterface
+final class JsonFilesystemExporter implements ExporterInterface
 {
     /**
      * @var string
