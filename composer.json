@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Sitewards\\Setup\\": "src/Sitewards/Setup"
+            "Sitewards\\Setup\\": "src"
         }
     },
     "authors": [
