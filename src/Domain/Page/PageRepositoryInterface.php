@@ -15,17 +15,12 @@ interface PageRepositoryInterface
      *
      * @return PageInterface[]
      */
-    public function findByIds(array $ids);
-
-    /**
-     * @return PageInterface[]
-     */
-    public function findAll();
+    public function find(array $ids = []);
 
     /**
      * @param PageInterface $page
      *
      * @return void
      */
-    public function import(PageInterface $page);
+    public function save(PageInterface $page);
 }

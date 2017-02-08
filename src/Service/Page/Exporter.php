@@ -68,9 +68,7 @@ final class Exporter implements ExporterInterface
      */
     public function execute()
     {
-        $data = ($this->identifier)
-            ? $this->pageRepository->findByIds($this->identifier)
-            : $this->pageRepository->findAll();
+        $data = $this->pageRepository->find($this->identifier);
 
         $jsonContent = $this->serializer->serialize($data, 'json');
 
