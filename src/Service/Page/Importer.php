@@ -43,7 +43,7 @@ final class Importer implements ImporterInterface
         $pages = $this->serializer->deserialize(file_get_contents($this->filename), 'array<Sitewards\Setup\Domain\Page\Page>', 'json');
 
         foreach ($pages as $page) {
-            $this->pageRepository->import($page);
+            $this->pageRepository->save($page);
         }
     }
 }
