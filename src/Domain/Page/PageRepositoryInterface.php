@@ -13,19 +13,19 @@ interface PageRepositoryInterface
     /**
      * @param array $ids
      *
-     * @return Page[]
+     * @return PageInterface[]
      */
     public function findByIds(array $ids);
 
     /**
-     * @return Page[]
+     * @return PageInterface[]
      */
     public function findAll();
 
     /**
-     * @param Page $page
+     * @param PageInterface $page
      *
      * @return void
      */
-    public function import(Page $page);
+    public function import(PageInterface $page);
 }

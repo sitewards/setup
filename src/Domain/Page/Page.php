@@ -10,7 +10,7 @@ namespace Sitewards\Setup\Domain\Page;
 
 use JMS\Serializer\Annotation\Type;
 
-class Page
+final class Page implements PageInterface
 {
     /**
      * @var string
@@ -60,7 +60,7 @@ class Page
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getIdentifier()
     {
@@ -68,7 +68,7 @@ class Page
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getTitle()
     {
@@ -76,7 +76,7 @@ class Page
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getContent()
     {
@@ -84,7 +84,7 @@ class Page
     }
 
     /**
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getActive()
     {
