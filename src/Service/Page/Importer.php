@@ -11,7 +11,7 @@ namespace Sitewards\Setup\Service\Page;
 use JMS\Serializer\Serializer;
 use Sitewards\Setup\Domain\Page\PageRepositoryInterface;
 
-class Importer implements ImporterInterface
+final class Importer implements ImporterInterface
 {
     /** @var string */
     private $filename = 'pages.json';
