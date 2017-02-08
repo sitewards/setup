@@ -17,9 +17,9 @@ use JMS\Serializer\Serializer;
 
 use Sitewards\Setup\Application\BridgeInterface;
 use Sitewards\Setup\Command\Page\Export;
-use Sitewards\Setup\Service\Page\Exporter;
-use Sitewards\Setup\Service\Page\Importer;
+use Sitewards\Setup\Service\Page\JsonFilesystemExporter;
 use Sitewards\Setup\Command\Page\Import;
+use Sitewards\Setup\Service\Page\JsonFilesystemImporter;
 
 class Application extends SymfonyApplication
 {
@@ -55,7 +55,7 @@ class Application extends SymfonyApplication
      */
     private function initCommands()
     {
-        $exporter = new Exporter(
+        $exporter = new JsonFilesystemExporter(
             $this->applicationBridge->getPageRepository(),
             $this->serializer,
             new Filesystem()
@@ -65,7 +65,7 @@ class Application extends SymfonyApplication
             new Export($exporter)
         );
 
-        $importer = new Importer(
+        $importer = new JsonFilesystemImporter(
             $this->applicationBridge->getPageRepository(),
             $this->serializer
         );
