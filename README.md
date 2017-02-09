@@ -1,5 +1,7 @@
 # Sitewards Setup #
 
+[![Build Status](https://travis-ci.org/sitewards/setup.svg?branch=master)](https://travis-ci.org/sitewards/setup)
+
 This is a module that allows a developer to import and export content and configuration via the command line to any framework, as long as a bridge module for that framework has been built.
 
 ## Architecture ##
