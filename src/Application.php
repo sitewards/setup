@@ -24,7 +24,7 @@ use Sitewards\Setup\Service\Page\JsonFilesystemImporter;
 class Application extends SymfonyApplication
 {
     const APPLICATION_NAME    = 'Sitewards Setup';
-    const APPLICATION_VERSION = '1.0.0';
+    const APPLICATION_VERSION = '2.0.1';
 
     /** @var BridgeInterface */
     private $applicationBridge;
